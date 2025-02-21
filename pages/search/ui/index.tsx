@@ -44,8 +44,8 @@ export const SearchResults = () => {
   }, [currentItem]);
 
   return (
-    <>
-      <View className="flex flex-col gap-4 flex-grow min-h-full">
+    <View className="flex flex-col gap-4 align-top">
+      <View className="flex flex-col gap-4 align-top">
         <Label>
           <Text>Search Movie/TV Show Name</Text>
           <Text className="text-destructive">*</Text>
@@ -71,6 +71,6 @@ export const SearchResults = () => {
         </View>
       </View>
       <DrawerWithSelectItems isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} currentItem={currentItem} handleSelectChange={onDrawerSelectChange} selectItems={Object.keys(SEARCH_BY_MAP).map((key) => ({ key, value: SEARCH_BY_MAP[key as keyof typeof SEARCH_BY_MAP] }))} />
-    </>
+    </View>
   );
 };

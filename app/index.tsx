@@ -11,7 +11,7 @@ export default function TabsScreen() {
 
   return (
     <SafeAreaView edges={["top", "bottom"]} className="flex align-top">
-      <View className="flex justify-center align-top p-4 gap-4">
+      <View className="flex justify-center align-top p-4 gap-4 min-h-full">
         <Tabs value={tabValue} onValueChange={setTabValue} className="w-full max-w-[400px] mx-auto flex-col">
           <TabsList className="flex-row w-full h-24">
             <TabsTrigger value="movies" className="flex-1">
@@ -29,7 +29,7 @@ export default function TabsScreen() {
             <MovieList tabValue={tabValue} />
           </TabsContent>
           {/* Search Results */}
-          <TabsContent value="search-results" className="flex-grow flex-col gap-4">
+          <TabsContent value="search-results" className="flex flex-grow flex-col align-top gap-4">
             <SearchResults />
           </TabsContent>
           {/* TV Shows */}
