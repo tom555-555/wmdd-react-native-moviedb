@@ -13,6 +13,7 @@ export const SearchResults = () => {
   const [searchResults, setSearchResults] = React.useState([]);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [currentItem, setCurrentItem] = React.useState<string>("");
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   const openBottomDrawer = () => {
     setIsDrawerOpen(true);
@@ -32,6 +33,11 @@ export const SearchResults = () => {
   };
 
   const executeSearch = async () => {
+    if (!searchQuery.trim()) {
+      setErrorMessage("Movie/TV show name is required");
+      return;
+    }
+    setErrorMessage(""); // Clear error message if input is valid
     const results = await fetchSearchResults(searchQuery);
     setSearchResults(results);
   };
@@ -50,7 +56,7 @@ export const SearchResults = () => {
           <Text>Search Movie/TV Show Name</Text>
           <Text className="text-destructive">*</Text>
         </Label>
-        <Input value={searchQuery} onChangeText={setSearchQuery} />
+        <Input value={searchQuery} onChangeText={setSearchQuery} className={errorMessage ? "border-red" : ""} />
         <View className="align-top flex-row justify-center gap-2">
           <Button
             className="bg-white text-black border border-gray-300 mx-auto w-1/2"
@@ -61,10 +67,12 @@ export const SearchResults = () => {
             <Text className="flex flex-row justify-center items-center gap-2 text-black w-full">{searchSearchBy}</Text>
             <ChevronDown style={{ marginTop: "auto", marginBottom: "auto", position: "absolute", right: 0 }} className="my-auto w-4 h-4 text-black" />
           </Button>
-          <Button onPress={executeSearch} className="w-1/2">
+          <Button onPress={executeSearch} className={errorMessage ? "border-red w-1/2" : "w-1/2"}>
             <Text className="text-white">Search</Text>
           </Button>
         </View>
+        {errorMessage && <Text className="text-red">{errorMessage}</Text>}
+
         <View className="flex-1 flex-shrink-0 flex-col gap-4">
           {searchResults.length > 0 && <ItemList items={searchResults} type="multi" />}
           {searchResults.length === 0 && <Text className="flex-1 text-center">Please initiate a search</Text>}
