@@ -10,9 +10,9 @@ export default function TabsScreen() {
   const [tabValue, setTabValue] = React.useState("movies");
 
   return (
-    <SafeAreaView edges={["top", "bottom"]} className="flex align-top">
-      <View className="flex justify-center align-top p-4 gap-4 min-h-full">
-        <Tabs value={tabValue} onValueChange={setTabValue} className="w-full max-w-[400px] mx-auto flex-col">
+    <SafeAreaView edges={["top", "bottom"]} className="flex-1 align-top">
+      <View className="flex-1 justify-center align-top p-4 gap-4 min-h-full">
+        <Tabs value={tabValue} onValueChange={setTabValue} className="flex-1 align-top w-full max-w-[400px] mx-auto flex-col">
           <TabsList className="flex-row w-full h-24">
             <TabsTrigger value="movies" className="flex-1">
               <Text>Movies</Text>
@@ -25,15 +25,15 @@ export default function TabsScreen() {
             </TabsTrigger>
           </TabsList>
           {/* Movies */}
-          <TabsContent value="movies" className="flex-shrink flex-col gap-4">
+          <TabsContent value="movies" className="flex-grow align-top flex-col gap-4">
             <MovieList tabValue={tabValue} />
           </TabsContent>
           {/* Search Results */}
-          <TabsContent value="search-results" className="flex flex-grow flex-col align-top gap-4">
+          <TabsContent value="search-results" className="flex-grow align-top flex-col gap-4">
             <SearchResults />
           </TabsContent>
           {/* TV Shows */}
-          <TabsContent value="tv-shows" className="flex-shrink flex-col gap-4">
+          <TabsContent value="tv-shows" className="flex-grow align-top flex-col gap-4">
             <TvShowList tabValue={tabValue} />
           </TabsContent>
         </Tabs>

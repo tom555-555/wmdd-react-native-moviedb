@@ -1,11 +1,10 @@
 import { Button, Label, RadioGroup, RadioGroupItem, Text } from "~/components/ui";
-import { ChevronDown, View } from "lucide-react-native";
+import { ChevronDown } from "lucide-react-native";
 import React, { useEffect } from "react";
+import { View } from "react-native";
 import { ItemList } from "~/widget/list/ui/item-list";
 import { API_ROOT, MOVIE_SEARCH_BY_MAP } from "~/shared/utils/constants";
 import { fetcher } from "~/shared/utils/fetcher";
-import { DrawerContext } from "~/app/context";
-import { BottomDrawer } from "~/shared/ui/bottom-drawer";
 import { DrawerWithSelectItems } from "~/widget/list/ui/drawer-with-select-items";
 
 type MovieListProps = {
@@ -48,23 +47,29 @@ export const MovieList = ({ tabValue }: MovieListProps) => {
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     (async () => {
-      const movies = await fetchMovies();
-      setMovies(movies);
+      try {
+        const movies = await fetchMovies();
+        setMovies(movies);
+      } catch (error) {
+        console.error("Error fetching movies", error);
+      }
     })();
   }, [movieSearchBy, tabValue]);
 
   return (
     <>
-      <Button
-        className="w-64 bg-white text-black border border-gray-300 mx-auto"
-        onPress={() => {
-          openBottomDrawer();
-        }}
-      >
-        <Text className="text-black">{movieSearchBy}</Text>
-        <ChevronDown style={{ marginTop: "auto", marginBottom: "auto", position: "absolute", right: 0 }} className="my-auto w-4 h-4 text-black" />
-      </Button>
-      <ItemList items={movies} type="movie" />
+      <View className="flex-1">
+        <Button
+          className="w-64 bg-white text-black border border-gray-300 mx-auto"
+          onPress={() => {
+            openBottomDrawer();
+          }}
+        >
+          <Text className="text-black">{movieSearchBy}</Text>
+          <ChevronDown style={{ marginTop: "auto", marginBottom: "auto", position: "absolute", right: 0 }} className="my-auto w-4 h-4 text-black" />
+        </Button>
+        <ItemList items={movies} type="movie" />
+      </View>
       <DrawerWithSelectItems isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} currentItem={currentItem} handleSelectChange={onDrawerSelectChange} selectItems={Object.keys(MOVIE_SEARCH_BY_MAP).map((key) => ({ key, value: MOVIE_SEARCH_BY_MAP[key as keyof typeof MOVIE_SEARCH_BY_MAP] }))} />
     </>
   );

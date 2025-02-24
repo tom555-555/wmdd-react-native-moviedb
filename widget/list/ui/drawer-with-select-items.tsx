@@ -14,7 +14,7 @@ type DrawerWithSelectItemsProps = {
 export const DrawerWithSelectItems = ({ isOpen, onClose, currentItem, handleSelectChange, selectItems }: DrawerWithSelectItemsProps) => {
   return (
     <BottomDrawer open={isOpen} onClose={() => {}} topTouchAreaStyle={{}}>
-      <View className="flex justify-center align-bottom">
+      <View className="justify-center align-bottom">
         <RadioGroup onValueChange={handleSelectChange} value={currentItem ?? ""}>
           {selectItems.map((item) => (
             <View key={item.value} className="flex flex-row items-center gap-2">

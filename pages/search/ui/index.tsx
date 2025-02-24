@@ -44,14 +44,14 @@ export const SearchResults = () => {
   }, [currentItem]);
 
   return (
-    <View className="flex flex-col gap-4 align-top">
-      <View className="flex flex-col gap-4 align-top">
+    <>
+      <View className="flex-1 px-4 flex-col gap-4 align-top">
         <Label>
           <Text>Search Movie/TV Show Name</Text>
           <Text className="text-destructive">*</Text>
         </Label>
         <Input value={searchQuery} onChangeText={setSearchQuery} />
-        <View className="flex flex-row justify-center items-center gap-2">
+        <View className="align-top flex-row justify-center gap-2">
           <Button
             className="bg-white text-black border border-gray-300 mx-auto w-1/2"
             onPress={() => {
@@ -65,12 +65,12 @@ export const SearchResults = () => {
             <Text className="text-white">Search</Text>
           </Button>
         </View>
-        <View className="flex flex-col gap-4 flex-grow">
+        <View className="flex-1 flex-shrink-0 flex-col gap-4">
           {searchResults.length > 0 && <ItemList items={searchResults} type="multi" />}
-          {searchResults.length === 0 && <Text className="text-center">Please initiate a search</Text>}
+          {searchResults.length === 0 && <Text className="flex-1 text-center">Please initiate a search</Text>}
         </View>
       </View>
       <DrawerWithSelectItems isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} currentItem={currentItem} handleSelectChange={onDrawerSelectChange} selectItems={Object.keys(SEARCH_BY_MAP).map((key) => ({ key, value: SEARCH_BY_MAP[key as keyof typeof SEARCH_BY_MAP] }))} />
-    </View>
+    </>
   );
 };

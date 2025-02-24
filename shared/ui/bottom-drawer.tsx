@@ -111,7 +111,7 @@ const FluidDrawerNative: React.FC<FluidDrawerNativeProps> = ({ open, onClose, ch
 };
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     width: "100%",
     backgroundColor: "rgba(0,0,0,0.6)",
   },
