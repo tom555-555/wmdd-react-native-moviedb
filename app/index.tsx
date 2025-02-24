@@ -11,7 +11,7 @@ export default function TabsScreen() {
 
   return (
     <SafeAreaView edges={["top", "bottom"]} className="flex-1 align-top">
-      <View className="flex-1 justify-center align-top p-4 gap-4 min-h-full">
+      <View className="flex-1 justify-center align-top gap-4 min-h-full">
         <Tabs value={tabValue} onValueChange={setTabValue} className="flex-1 align-top w-full max-w-[400px] mx-auto flex-col">
           <TabsList className="flex-row w-full h-24">
             <TabsTrigger value="movies" className="flex-1">

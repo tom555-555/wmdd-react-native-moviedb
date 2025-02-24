@@ -3,6 +3,7 @@ export const fetcher = async (url: string, method: "GET" | "POST" | "PUT" | "DEL
     const response = await fetch(url, {
       method,
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.MOVIE_DB_API_KEY}`,
       },
